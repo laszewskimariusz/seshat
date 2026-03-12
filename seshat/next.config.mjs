@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  experimental: {
-    serverComponentsExternalPackages: ['node-cron'],
-  },
+  serverExternalPackages: ['node-cron', 'better-sqlite3', '@prisma/adapter-better-sqlite3'],
 }
 
 export default nextConfig

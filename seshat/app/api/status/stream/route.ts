@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server'
 import { requireAuth } from '@/lib/apiAuth'
 import { getUserStatuses, registerSSEClient, unregisterSSEClient } from '@/lib/monitor'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
   let userId: string
   try {
