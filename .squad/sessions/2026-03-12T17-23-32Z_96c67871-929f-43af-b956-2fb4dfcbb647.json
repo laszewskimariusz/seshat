@@ -1,0 +1,17 @@
+{
+  "id": "96c67871-929f-43af-b956-2fb4dfcbb647",
+  "createdAt": "2026-03-12T17:23:01.621Z",
+  "lastActiveAt": "2026-03-12T17:24:26.521Z",
+  "messages": [
+    {
+      "role": "system",
+      "content": "🏗️ No team yet — casting one based on your project...",
+      "timestamp": "2026-03-12T17:23:32.312Z"
+    },
+    {
+      "role": "system",
+      "content": "⚠ Could not parse a team proposal from the model response.\n\nTry again, or run: squad init \"describe your project\"",
+      "timestamp": "2026-03-12T17:24:03.591Z"
+    }
+  ]
+}
