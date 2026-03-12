@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const user = await prisma.user.create({ data: { email, passwordHash, displayName } })
     const token = signToken({ userId: user.id, email: user.email })
 
-    const res = NextResponse.json({ user: { id: user.id, email: user.email, displayName: user.displayName } }, { status: 201 })
+    const res = NextResponse.json({ token, user: { id: user.id, email: user.email, displayName: user.displayName } }, { status: 201 })
     res.cookies.set('seshat_token', token, { httpOnly: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 7 })
     return res
   } catch (e) {

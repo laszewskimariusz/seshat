@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     if (!valid) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
 
     const token = signToken({ userId: user.id, email: user.email })
-    const res = NextResponse.json({ user: { id: user.id, email: user.email, displayName: user.displayName } })
+    const res = NextResponse.json({ token, user: { id: user.id, email: user.email, displayName: user.displayName } })
     res.cookies.set('seshat_token', token, { httpOnly: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 7 })
     return res
   } catch (e) {
