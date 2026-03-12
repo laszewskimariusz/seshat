@@ -1,0 +1,24 @@
+name: Squad Heartbeat
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  issues:
+    types: [closed]
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Squad heartbeat
+        run: npx @bradygaster/squad-cli heartbeat
+        env:
+          GITHUB_TOKEN: ${{ secrets.SQUAD_PAT }}

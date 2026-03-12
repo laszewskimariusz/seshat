@@ -1,0 +1,17 @@
+name: Branch Protection
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block direct agent push
+        run: |
+          echo "❌ Direct push to '${{ github.ref_name }}' is not allowed."
+          echo "Agents must open a PR. Only @laszewskimariusz may merge to beta and main."
+          exit 1
