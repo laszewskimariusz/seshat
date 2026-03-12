@@ -168,7 +168,7 @@ export default function AppPage() {
     if (!token) return
     setChecking(true)
     try {
-      const data = await apiFetch('/api/status', { method: 'POST' }, token)
+      const data = await apiFetch('/api/status/check', { method: 'POST' }, token)
       const map: Record<string, StatusEntry> = {}
       data.results.forEach((r: { serviceId: string; status: string; latencyMs?: number | null }) => {
         map[r.serviceId] = { status: r.status, latencyMs: r.latencyMs }
