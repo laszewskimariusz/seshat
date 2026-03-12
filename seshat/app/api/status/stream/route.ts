@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
-import { requireAuth } from '@/lib/apiAuth'
+import { getAuthUser } from '@/lib/apiAuth'
+import { verifyToken } from '@/lib/auth'
 import { getUserStatuses, registerSSEClient, unregisterSSEClient } from '@/lib/monitor'
 
 export const dynamic = 'force-dynamic'
@@ -7,7 +8,12 @@ export const dynamic = 'force-dynamic'
 export async function GET(req: NextRequest) {
   let userId: string
   try {
-    const user = requireAuth(req)
+    // Try Bearer header first, then cookie, then ?token= query param (needed for EventSource)
+    const user = getAuthUser(req) ?? (() => {
+      const t = req.nextUrl.searchParams.get('token')
+      return t ? verifyToken(t) : null
+    })()
+    if (!user) throw new Error('Unauthorized')
     userId = user.userId
   } catch {
     return new Response('Unauthorized', { status: 401 })
